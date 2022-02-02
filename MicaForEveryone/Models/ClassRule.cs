@@ -3,12 +3,12 @@ using Vanara.PInvoke;
 
 using MicaForEveryone.Interfaces;
 using MicaForEveryone.UI.Models;
-using MicaForEveryone.UI.ViewModels;
+using MicaForEveryone.ViewModels;
 using MicaForEveryone.Win32;
 
 namespace MicaForEveryone.Models
 {
-    public class ClassRule : IRule
+    internal class ClassRule : IRule
     {
         public ClassRule(string className)
         {
@@ -36,7 +36,7 @@ namespace MicaForEveryone.Models
         {
             var viewModel = Program.CurrentApp.Container.GetService<IRuleSettingsViewModel>();
             viewModel.ParentViewModel = parent;
-            viewModel.InitializeData(this);
+            viewModel.Initialize(this);
             return new RulePaneItem(ClassName, PaneItemType.Class, viewModel);
         }
     }

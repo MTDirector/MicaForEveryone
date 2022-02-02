@@ -4,7 +4,7 @@ using MicaForEveryone.UI.Models;
 
 namespace MicaForEveryone.UI.Triggers
 {
-    public class GeneralPaneTrigger : StateTriggerBase
+    internal sealed class GeneralPaneTrigger : StateTriggerBase
     {
         private IPaneItem _paneItem;
 

@@ -2,8 +2,7 @@
 
 namespace MicaForEveryone.UI.Models
 {
-
-    public class RulePaneItem : IPaneItem
+    public sealed class RulePaneItem : IPaneItem
     {
         public RulePaneItem(string title, PaneItemType type, IRuleSettingsViewModel viewModel)
         {

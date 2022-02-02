@@ -11,7 +11,7 @@ using MicaForEveryone.Interfaces;
 using MicaForEveryone.Models;
 using MicaForEveryone.UI;
 using MicaForEveryone.UI.Brushes;
-using MicaForEveryone.UI.ViewModels;
+using MicaForEveryone.ViewModels;
 using MicaForEveryone.Win32;
 using MicaForEveryone.Xaml;
 
@@ -182,7 +182,7 @@ namespace MicaForEveryone.Views
 
         private void View_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel.Initialize(sender);
+            ViewModel.Initialize(this);
         }
 
         private void View_ActualThemeChanged(FrameworkElement sender, object args)

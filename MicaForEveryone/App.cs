@@ -8,7 +8,6 @@ using MicaForEveryone.Interfaces;
 using MicaForEveryone.Models;
 using MicaForEveryone.Services;
 using MicaForEveryone.ViewModels;
-using MicaForEveryone.UI.ViewModels;
 using MicaForEveryone.Xaml;
 
 namespace MicaForEveryone
@@ -24,7 +23,6 @@ namespace MicaForEveryone
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             Container = RegisterServices();
-            _uwpApp.Container = Container;
 
             if (Environment.OSVersion.Version.Build < 22000)
             {
@@ -92,9 +90,9 @@ namespace MicaForEveryone
             services.AddSingleton<IViewService, ViewService>();
 
             services.AddTransient<ITrayIconViewModel, TrayIconViewModel>();
-            services.AddTransient<IContentDialogViewModel, ContentDialogViewModel>();
+            services.AddTransient<UI.ViewModels.IContentDialogViewModel, ContentDialogViewModel>();
             services.AddTransient<ISettingsViewModel, SettingsViewModel>();
-            services.AddTransient<IGeneralSettingsViewModel, GeneralSettingsViewModel>();
+            services.AddTransient<UI.ViewModels.IGeneralSettingsViewModel, GeneralSettingsViewModel>();
             services.AddTransient<IRuleSettingsViewModel, RuleSettingsViewModel>();
 
             return services.BuildServiceProvider();

@@ -2,7 +2,7 @@
 
 using MicaForEveryone.Models;
 using MicaForEveryone.UI.Models;
-using MicaForEveryone.UI.ViewModels;
+using MicaForEveryone.ViewModels;
 
 namespace MicaForEveryone.Interfaces
 {

@@ -14,12 +14,20 @@ using static Vanara.PInvoke.User32;
 using MicaForEveryone.Config;
 using MicaForEveryone.Interfaces;
 using MicaForEveryone.Models;
-using MicaForEveryone.UI.ViewModels;
 using MicaForEveryone.Views;
 using MicaForEveryone.Win32;
+using MicaForEveryone.Xaml;
 
 namespace MicaForEveryone.ViewModels
 {
+    public interface ITrayIconViewModel : UI.ViewModels.ITrayIconViewModel
+    {
+        void Initialize(XamlWindow sender);
+        void ShowContextMenu(Point offset, Rectangle notifyIconRect);
+        void ShowTooltipPopup(Rectangle notifyIconRect);
+        void HideTooltipPopup();
+    }
+
     internal class TrayIconViewModel : BaseViewModel, ITrayIconViewModel
     {
         private readonly IConfigService _configService;
@@ -27,7 +35,7 @@ namespace MicaForEveryone.ViewModels
         private BackdropType _backdropType;
         private TitlebarColorMode _titlebarColor;
         private bool _extendFrameIntoClientArea;
-        private MainWindow _window;
+        private XamlWindow _window;
         private IRule _globalRule;
 
         public TrayIconViewModel(IConfigService configService)
@@ -56,16 +64,16 @@ namespace MicaForEveryone.ViewModels
             true;
 #endif
 
-        public BackdropType BackdropType
+        public object BackdropPreference
         {
             get => _backdropType;
-            set => SetProperty(ref _backdropType, value);
+            set => SetProperty(ref _backdropType, (BackdropType)value);
         }
 
-        public TitlebarColorMode TitlebarColor
+        public object TitlebarColor
         {
             get => _titlebarColor;
-            set => SetProperty(ref _titlebarColor, value);
+            set => SetProperty(ref _titlebarColor, (TitlebarColorMode)value);
         }
 
         public bool ExtendFrameIntoClientArea
@@ -86,9 +94,9 @@ namespace MicaForEveryone.ViewModels
 
         public ICommand OpenSettingsCommand { get; }
 
-        public async void Initialize(object sender)
+        public async void Initialize(XamlWindow sender)
         {
-            _window = (MainWindow)sender;
+            _window = sender;
             _window.View.ActualThemeChanged += View_ActualThemeChanged;
 
             var configService = Program.CurrentApp.Container.GetService<IConfigService>();
@@ -179,7 +187,7 @@ namespace MicaForEveryone.ViewModels
 
             await _window.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                BackdropType = _globalRule.BackdropPreference;
+                BackdropPreference = _globalRule.BackdropPreference;
                 TitlebarColor = _globalRule.TitlebarColor;
                 ExtendFrameIntoClientArea = _globalRule.ExtendFrameIntoClientArea;
             });
@@ -187,8 +195,8 @@ namespace MicaForEveryone.ViewModels
 
         private async Task UpdateRuleAsync()
         {
-            _globalRule.BackdropPreference = BackdropType;
-            _globalRule.TitlebarColor = TitlebarColor;
+            _globalRule.BackdropPreference = _backdropType;
+            _globalRule.TitlebarColor = _titlebarColor;
             _globalRule.ExtendFrameIntoClientArea = ExtendFrameIntoClientArea;
 
             _configService.RaiseChanged();
@@ -233,7 +241,7 @@ namespace MicaForEveryone.ViewModels
 
         private async void ChangeBackdropType(object parameter)
         {
-            BackdropType = parameter.ToString() switch
+            BackdropPreference = parameter.ToString() switch
             {
                 "Default" => BackdropType.Default,
                 "None" => BackdropType.None,

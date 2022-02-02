@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
 
 using MicaForEveryone.Interfaces;
 using MicaForEveryone.Models;
 using MicaForEveryone.UI.Models;
 using MicaForEveryone.UI.ViewModels;
+using MicaForEveryone.Xaml;
 
 #if !DEBUG
 using MicaForEveryone.Win32;
@@ -16,6 +17,11 @@ using MicaForEveryone.Win32;
 
 namespace MicaForEveryone.ViewModels
 {
+    public interface ISettingsViewModel : UI.ViewModels.ISettingsViewModel
+    {
+        void Initialize(XamlWindow sender);
+    }
+
     internal class SettingsViewModel : BaseViewModel, ISettingsViewModel
     {
         private readonly IConfigService _configService;
@@ -46,9 +52,9 @@ namespace MicaForEveryone.ViewModels
             true;
 #endif
 
-        public Version Version { get; } = typeof(Program).Assembly.GetName().Version;
+        public object Version { get; } = typeof(Program).Assembly.GetName().Version;
 
-        public ObservableCollection<IPaneItem> PaneItems { get; set; } = new();
+        public IList<IPaneItem> PaneItems { get; set; } = new ObservableCollection<IPaneItem>();
         public IPaneItem SelectedPane
         {
             get => _selectedPane;
@@ -59,20 +65,17 @@ namespace MicaForEveryone.ViewModels
             }
         }
 
-        public ObservableCollection<BackdropType> BackdropTypes { get; } = new();
-        public ObservableCollection<TitlebarColorMode> TitlebarColorModes { get; } = new();
+        public IList<object> BackdropTypes { get; } = new ObservableCollection<object>();
+        public IList<object> TitlebarColorModes { get; } = new ObservableCollection<object>();
 
         public ICommand CloseCommand { get; }
         public ICommand AddProcessRuleCommand { get; }
         public ICommand AddClassRuleCommand { get; }
         public ICommand RemoveRuleCommand { get; }
 
-        public void Initialize(object sender)
+        public void Initialize(XamlWindow sender)
         {
-            if (sender is FrameworkElement element)
-            {
-                _dispatcher = element.Dispatcher;
-            }
+            _dispatcher = sender.Dispatcher;
 
             if (BackdropTypes.Count <= 0)
             {

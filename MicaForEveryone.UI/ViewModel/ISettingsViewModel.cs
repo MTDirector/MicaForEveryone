@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 
-using MicaForEveryone.Models;
 using MicaForEveryone.UI.Models;
 
 namespace MicaForEveryone.UI.ViewModels
@@ -12,19 +10,17 @@ namespace MicaForEveryone.UI.ViewModels
     {
         bool SystemBackdropIsSupported { get; }
 
-        Version Version { get; }
+        object Version { get; }
 
-        ObservableCollection<BackdropType> BackdropTypes { get; }
-        ObservableCollection<TitlebarColorMode> TitlebarColorModes { get; }
+        IList<object> BackdropTypes { get; }
+        IList<object> TitlebarColorModes { get; }
 
-        ObservableCollection<IPaneItem> PaneItems { get; set; }
+        IList<IPaneItem> PaneItems { get; }
         IPaneItem SelectedPane { get; set; }
 
         ICommand CloseCommand { get; }
         ICommand AddProcessRuleCommand { get; }
         ICommand AddClassRuleCommand { get; }
         ICommand RemoveRuleCommand { get; }
-
-        void Initialize(object sender);
     }
 }

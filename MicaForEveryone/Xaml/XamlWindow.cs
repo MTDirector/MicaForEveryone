@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Core;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
@@ -7,8 +8,7 @@ using Vanara.PInvoke;
 using static Vanara.PInvoke.User32;
 
 using MicaForEveryone.Win32;
-using MicaForEveryone.Models;
-using System;
+using MicaForEveryone.UI.Models;
 
 namespace MicaForEveryone.Xaml
 {
@@ -60,17 +60,17 @@ namespace MicaForEveryone.Xaml
             {
                 if (Macros.LOWORD(wParam) == 0) // WA_INACTIVE = 0
                 {
-                    LostFocus?.Invoke(this, EventArgs.Empty);
+                    LostFocus?.Invoke(this, null);
                 }
                 else // WA_ACTIVE or WA_CLICKACTIVE
                 {
-                    GotFocus?.Invoke(this, EventArgs.Empty);
+                    GotFocus?.Invoke(this, null);
                 }
             }
             return base.WndProc(hwnd, umsg, wParam, lParam);
         }
 
-        public event EventHandler GotFocus;
-        public event EventHandler LostFocus;
+        public event EventHandler<object> GotFocus;
+        public event EventHandler<object> LostFocus;
     }
 }

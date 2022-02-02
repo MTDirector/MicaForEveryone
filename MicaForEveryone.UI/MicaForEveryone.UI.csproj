@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProjectGuid>{740EA99D-B3F6-445D-A357-962A61357006}</ProjectGuid>
-    <OutputType>AppContainerExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MicaForEveryone.UI</RootNamespace>
     <AssemblyName>MicaForEveryone.UI</AssemblyName>
@@ -81,6 +81,7 @@
     <Compile Include="Converters\VisibleIfFlase.cs" />
     <Compile Include="Converters\VisibleIfTrue.cs" />
     <Compile Include="Models\GeneralPaneItem.cs" />
+    <Compile Include="Models\IFocusableWindow.cs" />
     <Compile Include="Models\IPaneItem.cs" />
     <Compile Include="Models\RulePaneItem.cs" />
     <Compile Include="Models\PaneItemType.cs" />
@@ -106,14 +107,6 @@
     <Compile Include="ViewModel\ITrayIconViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest">
-      <SubType>Designer</SubType>
-    </AppxManifest>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Square150x150Logo.png" />
-    <Content Include="Assets\Square44x44Logo.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>

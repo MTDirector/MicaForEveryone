@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 
 using MicaForEveryone.Win32;
 using MicaForEveryone.UI;
-using MicaForEveryone.UI.ViewModels;
+using MicaForEveryone.ViewModels;
 using MicaForEveryone.Xaml;
 
 using static Vanara.PInvoke.User32;

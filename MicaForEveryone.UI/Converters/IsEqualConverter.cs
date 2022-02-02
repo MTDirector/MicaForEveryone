@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Data;
 
 namespace MicaForEveryone.UI.Converters
 {
-    internal class IsEqualConverter : IValueConverter
+    internal sealed class IsEqualConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

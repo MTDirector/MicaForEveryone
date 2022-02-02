@@ -8,7 +8,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
-using MicaForEveryone.Models;
+using MicaForEveryone.UI.Models;
 
 // based on gist: https://gist.github.com/lhak/641becbc6a4a5f809c224fc83600bb36
 
@@ -270,13 +270,13 @@ namespace MicaForEveryone.UI.Brushes
             });
         }
 
-        private void Window_GotFocus(object sender, EventArgs e)
+        private void Window_GotFocus(object sender, object e)
         {
             _windowActivated = true;
             UpdateBrush();
         }
 
-        private void Window_LostFocus(object sender, EventArgs e)
+        private void Window_LostFocus(object sender, object e)
         {
             _windowActivated = false;
             UpdateBrush();

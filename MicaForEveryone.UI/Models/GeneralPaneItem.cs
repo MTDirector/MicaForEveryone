@@ -2,7 +2,7 @@
 
 namespace MicaForEveryone.UI.Models
 {
-    public class GeneralPaneItem : IPaneItem
+    public sealed class GeneralPaneItem : IPaneItem
     {
         public GeneralPaneItem(IGeneralSettingsViewModel viewModel)
         {

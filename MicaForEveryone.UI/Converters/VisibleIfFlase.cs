@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace MicaForEveryone.UI.Converters
 {
-    public class VisibleIfFalse : IValueConverter
+    internal sealed class VisibleIfFalse : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

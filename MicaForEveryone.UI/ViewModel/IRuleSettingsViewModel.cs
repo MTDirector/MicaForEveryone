@@ -1,20 +1,16 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 
-using MicaForEveryone.Models;
-
 namespace MicaForEveryone.UI.ViewModels
 {
     public interface IRuleSettingsViewModel : INotifyPropertyChanged
     {
-        BackdropType BackdropType { get; set; }
-        TitlebarColorMode TitlebarColor { get; set; }
+        object BackdropType { get; set; }
+        object TitlebarColor { get; set; }
         bool ExtendFrameIntoClientArea { get; set; }
 
         ISettingsViewModel ParentViewModel { get; set; }
 
         ICommand SaveCommand { get; }
-
-        void InitializeData(object data);
     }
 }
