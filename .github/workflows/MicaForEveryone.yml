@@ -2,9 +2,9 @@ name: MicaForEveryone
 
 on:
   push:
-    branches: [ master ]
+    branches: [ msix ]
   pull_request:
-    branches: [ master ]
+    branches: [ msix ]
 
 jobs:
 
@@ -42,7 +42,7 @@ jobs:
         Platform: ${{ matrix.platform }}
     
     - name: Build the application
-      run: msbuild MicaForEveryone\MicaForEveryone.csproj /t:Build /p:Configuration=$env:Configuration /p:Platform=$env:Platform
+      run: msbuild MicaForEveryone.Packaging\MicaForEveryone.Packaging.csproj /t:Build /p:Configuration=$env:Configuration /p:Platform=$env:Platform
       env:
         Configuration: ${{ matrix.configuration }}
         Platform: ${{ matrix.platform }}

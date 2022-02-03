@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
+
+    <Identity
+      Name="MicaForEveryone"
+      Publisher="CN=minusium"
+      Version="1.0.0.0" />
+
+    <Properties>
+        <DisplayName>Mica For Everyone</DisplayName>
+        <PublisherDisplayName>Minusium</PublisherDisplayName>
+        <Logo>Images\StoreLogo.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22000.0" MaxVersionTested="10.0.22523.0" />
+
+        <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.29231.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+
+    <Applications>
+        <Application Id="MicaForEveryone"
+          Executable="MicaForEveryone.exe"
+          EntryPoint="Windows.FullTrustApplication">
+            <uap:VisualElements
+              DisplayName="Mica For Everyone"
+              Description="an utility to add backdrop effect on frame of win32 apps"
+              BackgroundColor="transparent"
+              Square150x150Logo="Images\Square150x150Logo.png"
+              Square44x44Logo="Images\Square44x44Logo.png">
+                <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
+                <uap:SplashScreen Image="Images\SplashScreen.png" />
+            </uap:VisualElements>
+
+            <Extensions>
+                <uap3:Extension Category="windows.appExecutionAlias" Executable="MicaForEveryone.exe" EntryPoint="Windows.FullTrustApplication">
+                    <uap3:AppExecutionAlias>
+                        <desktop:ExecutionAlias Alias="mfe.exe" />
+                        <desktop:ExecutionAlias Alias="MicaForEveryone.exe" />
+                    </uap3:AppExecutionAlias>
+                </uap3:Extension>
+                <desktop:Extension Category="windows.startupTask" Executable="MicaForEveryone.exe" EntryPoint="Windows.FullTrustApplication">
+                    <desktop:StartupTask TaskId="MicaForEveryone" Enabled="false" DisplayName="Mica For Everyone" />
+                </desktop:Extension>
+            </Extensions>
+        </Application>
+    </Applications>
+
+    <Capabilities>
+        <rescap:Capability Name="runFullTrust" />
+    </Capabilities>
+</Package>
